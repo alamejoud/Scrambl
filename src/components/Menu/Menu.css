@@ -1,0 +1,32 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding-inline: 20px;
+}
+
+.menu-button {
+    padding-block: 10px;
+}
+
+.title {
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
+}
+
+.left, .right {
+    width: 20vw;
+}
+
+.left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.right {
+    display: flex;
+    justify-content: flex-end;
+}

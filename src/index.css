@@ -1,0 +1,19 @@
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #242424;
+  height: 100%;
+}
+
+* {
+  font-family: Josefin Sans, sans-serif;
+  font-weight: 700;
+  color: white;
+}
+
+button > i {
+    display: flex;
+    justify-content: center;
+}

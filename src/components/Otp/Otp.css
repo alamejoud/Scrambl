@@ -1,0 +1,47 @@
+
+.otp-input {
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    color: white;
+    border: 2px solid #555;
+    border-radius: 5px;
+    font-size: 2.5em;
+    text-transform: uppercase;
+    user-select: none;
+    caret-color: transparent;
+    cursor: default;
+    margin-inline: 5px;
+    text-align: center;
+    padding-top: 3px;
+}
+
+.filled {
+    border: 2px solid white;
+    /*animation*/
+    animation: pulse 0.1s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.green {
+    background-color: rgb(83, 141, 78);
+    border: 2px solid rgb(83, 141, 78);
+    color: white;
+}
+
+.yellow {
+    background-color: #b59f3b;
+    border: 2px solid #b59f3b;
+    color: white;
+}
