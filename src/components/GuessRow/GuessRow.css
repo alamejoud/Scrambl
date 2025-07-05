@@ -5,7 +5,7 @@
     margin: 5px 0;
 }
 
-.guess-row-invalid {
+/* .guess-row-invalid {
     animation: translate-x-shaking 0.5s ease-in-out;
 }
 
@@ -16,4 +16,4 @@
  60% { transform: translateX(-5px); }
  80% { transform: translateX(0px); }
  100% { transform: translateX(0); }
-}
+} */

@@ -3,6 +3,7 @@ import GuessRow from "../GuessRow/GuessRow";
 import CryptoJS from "crypto-js";
 import "./GameSection.css";
 import InfoPanel from "../InfoPanel/InfoPanel";
+import * as bootstrap from "bootstrap";
 
 const dateKey = new Date().toISOString().slice(0, 10);
 
@@ -59,6 +60,15 @@ const otpSaved = (): string[][] => {
 const defaultOtp = Array.from({ length: 6 }, () =>
     Array.from({ length: word.length }, () => "")
 );
+//Genius Magnificent Impressive Splendid Phew
+const toastMessages = [
+    "Genius",
+    "Magnificent",
+    "Impressive",
+    "Splendid",
+    "Phew",
+    word.toUpperCase(),
+];
 
 const GameSection = () => {
     const [otp, setOtp] = useState(otpSaved());
@@ -71,6 +81,8 @@ const GameSection = () => {
     const [shuffledWord, setShuffledWord] = useState(
         [...new Set(word.split(""))].sort(() => Math.random() - 0.5).join("")
     );
+
+    const [toastMessage, setToastMessage] = useState("");
 
     const isCorrect = useCallback(
         () =>
@@ -88,6 +100,16 @@ const GameSection = () => {
         return currentGuess >= 6 || isCorrect();
     }, [isCorrect, currentGuess]);
 
+    const handleToast = useCallback(() => {
+        const toastLiveExample = document.getElementById("liveToast");
+        if (toastLiveExample) {
+            setToastMessage(toastMessages[currentGuess]);
+            new bootstrap.Toast(toastLiveExample, {
+                autohide: false,
+            }).show();
+        }
+    }, [currentGuess]);
+
     const handleEnter = useCallback(() => {
         if (currentGuess < 6) {
             const currentRow = otp[currentGuess];
@@ -95,30 +117,33 @@ const GameSection = () => {
             const actual = word.toUpperCase();
 
             if (guess === actual) {
-                alert("Congratulations! You've guessed the word!");
+                handleToast();
                 setCurrentCursor(0);
                 localStorage.setItem("otp", JSON.stringify(otp));
                 return setCurrentGuess(6);
             }
 
             if (currentGuess < 6 && currentRow[word.length - 1] !== "") {
-                const invalidRow =
-                    document.querySelectorAll(".guess-row")[currentGuess];
+                const invalidRow = document.querySelectorAll(".guess-row")[
+                    currentGuess
+                ] as HTMLElement;
                 invalidRow.classList.add("guess-row-invalid");
                 invalidRow
                     .querySelectorAll(".otp-input")
                     .forEach((input, index) => {
+                        const inputElem = input as HTMLElement;
                         if (
-                            input.innerHTML.toUpperCase() ===
+                            inputElem.innerHTML.toUpperCase() ===
                             word.charAt(index).toUpperCase()
                         ) {
-                            input.classList.add("green");
+                            inputElem.classList.add("green");
                         } else if (
                             word
                                 .toUpperCase()
-                                .indexOf(input.innerHTML.toUpperCase()) != -1
+                                .indexOf(inputElem.innerHTML.toUpperCase()) !==
+                            -1
                         ) {
-                            input.classList.add("yellow");
+                            inputElem.classList.add("gray");
                         }
                     });
                 setCurrentCursor(0);
@@ -130,11 +155,11 @@ const GameSection = () => {
 
             if (currentGuess === 5) {
                 setCurrentCursor(0);
-                alert(`Game over! The word was: ${word.toUpperCase()}`);
+                handleToast();
                 setCurrentGuess(6);
             }
         }
-    }, [currentGuess, otp]);
+    }, [currentGuess, otp, handleToast]);
 
     const handleBackspace = useCallback(() => {
         if (isFinished()) return;
@@ -184,7 +209,7 @@ const GameSection = () => {
                             .toUpperCase()
                             .indexOf(input.innerHTML.toUpperCase()) != -1
                     ) {
-                        input.classList.add("yellow");
+                        input.classList.add("gray");
                     }
                 });
             }
@@ -208,18 +233,24 @@ const GameSection = () => {
             if (isFinished()) return;
             const key = event.key.toUpperCase();
 
-            if (key === "BACKSPACE") {
+            if (currentCursor != 0 && key === "BACKSPACE") {
                 handleBackspace();
-            } else if (key === "ENTER") {
+            } else if (currentCursor >= word.length && key === "ENTER") {
                 handleEnter();
-            } else if (/^[A-Z]$/.test(key)) {
+            } else if (currentCursor < word.length && /^[A-Z]$/.test(key)) {
                 handleLetterButton(key);
             }
         };
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [handleBackspace, handleEnter, handleLetterButton, isFinished]);
+    }, [
+        handleBackspace,
+        handleEnter,
+        handleLetterButton,
+        isFinished,
+        currentCursor,
+    ]);
 
     return (
         <div className="game-section">
@@ -290,6 +321,17 @@ const GameSection = () => {
                 </div>
             </div>
             <InfoPanel />
+            <div className="toast-container top-0 start-50 translate-middle-x">
+                <div
+                    id="liveToast"
+                    className="toast"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                >
+                    {toastMessage}
+                </div>
+            </div>
         </div>
     );
 };

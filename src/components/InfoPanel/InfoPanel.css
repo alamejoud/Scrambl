@@ -1,0 +1,69 @@
+.htp-letter-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px 0;
+}
+
+.htp-green-letter-explanation,
+.htp-gray-letter-explanation {
+    grid-column: span 3 / span 3;
+    display: flex;
+    align-items: center;
+}
+
+.htp-green-letter,
+.htp-gray-letter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letter-container {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #555;
+    border-radius: 5px;
+    font-size: 1.5em;
+    padding-top: 3px;
+}
+
+
+.htp-green-letter .letter-container
+ {
+    animation: flip 0.5s ease-in-out 0s forwards, changeColorGreen 0s ease-in-out 0.25s forwards;
+}
+
+.htp-gray-letter .letter-container {
+    animation: flip 0.5s ease-in-out 0s forwards, changeColorGray 0s ease-in-out 0.25s forwards;
+}
+
+@keyframes flip {
+    0% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes changeColorGreen {
+    to {
+        background-color: rgb(83, 141, 78);
+        border: 2px solid rgb(83, 141, 78);
+        color: white;
+    }
+  }
+
+@keyframes changeColorGray {
+    to {
+        background-color: #3a3a3c;
+        border: 2px solid #3a3a3c;
+        color: white;
+    }
+}

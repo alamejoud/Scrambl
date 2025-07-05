@@ -16,7 +16,7 @@ const InfoPanel = () => {
                                 className="modal-title fs-5"
                                 id="exampleModalLabel"
                             >
-                                Modal title
+                                How To Play
                             </h1>
                             <button
                                 type="button"
@@ -26,9 +26,51 @@ const InfoPanel = () => {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quisquam, quos.
+                            <p className="Help-module_subheading__mbRG9">
+                                Guess the Wordle in 6 tries.
+                            </p>
+                            <section>
+                                <ul className="Help-module_instructions__uXsG6">
+                                    <li>
+                                        Each guess must be a valid 7-letter
+                                        word.
+                                    </li>
+                                    <li>
+                                        The color of the tiles will change to
+                                        show how close your guess was to the
+                                        word.
+                                    </li>
+                                </ul>
+                                <div className="htp-letter-container">
+                                    <div className="htp-green-letter">
+                                        <div>
+                                            <div className="letter-container">
+                                                P
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="htp-green-letter-explanation">
+                                        <div className="letter-explanation-container">
+                                            Letter is in the correct location
+                                        </div>
+                                    </div>
+                                    <div className="htp-gray-letter">
+                                        <div>
+                                            <div className="letter-container">
+                                                I
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="htp-gray-letter-explanation">
+                                        <div className="letter-explanation-container">
+                                            Letter is not in the word
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <hr />
+                            <p style={{ marginBottom: 0 }}>
+                                A new puzzle is released daily at midnight.
                             </p>
                         </div>
                         <div className="modal-footer">
@@ -37,10 +79,7 @@ const InfoPanel = () => {
                                 className="btn btn-secondary"
                                 data-bs-dismiss="modal"
                             >
-                                Close
-                            </button>
-                            <button type="button" className="btn btn-primary">
-                                Save changes
+                                Understood
                             </button>
                         </div>
                     </div>

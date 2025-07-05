@@ -10,6 +10,15 @@ const Menu = () => {
             </div>
             <p className="title">Scrambl</p>
             <div className="right">
+                <button
+                    className="btn menu-button"
+                    onClick={() => {
+                        localStorage.removeItem("otp");
+                        window.location.reload();
+                    }}
+                >
+                    Reset
+                </button>
                 <button className="btn menu-button">
                     <i className="bi bi-bar-chart"></i>
                 </button>
