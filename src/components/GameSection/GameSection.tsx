@@ -109,8 +109,8 @@ const GameSection = ({ gameMode }: GameSectionProps) => {
                 "Magnificent",
                 "Impressive",
                 "Splendid",
-                "Phew",
                 "Great",
+                "Phew",
                 word.toUpperCase(),
             ];
             if (toastLiveExample) {
@@ -211,8 +211,8 @@ const GameSection = ({ gameMode }: GameSectionProps) => {
     );
 
     useEffect(() => {
-        document.querySelectorAll(".guess-row").forEach((row, index) => {
-            if (index < currentGuess) {
+        document.querySelectorAll(".guess-row").forEach((row) => {
+            if (row.querySelector(".otp-input")?.innerHTML != "") {
                 row.querySelectorAll(".otp-input").forEach((input, index) => {
                     if (
                         input.innerHTML.toUpperCase() ===
