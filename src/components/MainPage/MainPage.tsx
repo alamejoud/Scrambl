@@ -2,11 +2,15 @@ import "./MainPage.css";
 import Menu from "../Menu/Menu";
 import GameSection from "../GameSection/GameSection";
 
-const MainPage = () => {
+interface MainPageProps {
+    gameMode: string;
+}
+
+const MainPage = ({ gameMode }: MainPageProps) => {
     return (
         <>
             <Menu />
-            <GameSection />
+            <GameSection gameMode={gameMode} />
         </>
     );
 };

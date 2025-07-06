@@ -1,10 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 
 const Menu = () => {
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate("/home");
+    };
+
     return (
         <div className="navbar">
             <div className="left">
-                <button className="btn menu-button">
+                <button className="btn menu-button" onClick={handleBack}>
                     <i className="bi bi-arrow-left"></i>
                 </button>
             </div>

@@ -44,40 +44,41 @@ const wordSaved = (): string => {
     }
 };
 
-const word = wordSaved();
+const randomWord = (): string => {
+    return words[Math.floor(Math.random() * words.length)];
+};
 
-const letterCount: Map<string, number> = new Map();
-
-word.split("").forEach((letter) => {
-    letterCount.set(letter, (letterCount.get(letter) || 0) + 1);
-});
+const dailyWord = wordSaved();
 
 const otpSaved = (): string[][] => {
     const savedOtp = localStorage.getItem("otp");
-    return savedOtp ? JSON.parse(savedOtp) : defaultOtp;
+    return savedOtp
+        ? JSON.parse(savedOtp)
+        : Array.from({ length: 6 }, () => Array.from({ length: 7 }, () => ""));
 };
 
-const defaultOtp = Array.from({ length: 6 }, () =>
-    Array.from({ length: word.length }, () => "")
-);
-//Genius Magnificent Impressive Splendid Phew
-const toastMessages = [
-    "Genius",
-    "Magnificent",
-    "Impressive",
-    "Splendid",
-    "Phew",
-    word.toUpperCase(),
-];
+interface GameSectionProps {
+    gameMode: string;
+}
 
-const GameSection = () => {
-    const [otp, setOtp] = useState(otpSaved());
+const GameSection = ({ gameMode }: GameSectionProps) => {
+    const [word] = useState(() =>
+        gameMode === "dailyGame" ? dailyWord : randomWord()
+    );
+    const [otp, setOtp] = useState(
+        gameMode === "dailyGame"
+            ? otpSaved()
+            : Array.from({ length: 6 }, () =>
+                  Array.from({ length: 7 }, () => "")
+              )
+    );
     const [currentGuess, setCurrentGuess] = useState(
         otp.findIndex((value) => value[0] === "") !== -1
             ? otp.findIndex((value) => value[0] === "")
             : 6
     );
     const [currentCursor, setCurrentCursor] = useState(0);
+
     const [shuffledWord, setShuffledWord] = useState(
         [...new Set(word.split(""))].sort(() => Math.random() - 0.5).join("")
     );
@@ -93,22 +94,34 @@ const GameSection = () => {
                 (otp.findIndex((value) => value[0] === "") !== -1
                     ? otp.findIndex((value) => value[0] === "")
                     : 6),
-        [otp, currentGuess]
+        [otp, currentGuess, word]
     );
 
     const isFinished = useCallback(() => {
         return currentGuess >= 6 || isCorrect();
     }, [isCorrect, currentGuess]);
 
-    const handleToast = useCallback(() => {
-        const toastLiveExample = document.getElementById("liveToast");
-        if (toastLiveExample) {
-            setToastMessage(toastMessages[currentGuess]);
-            new bootstrap.Toast(toastLiveExample, {
-                autohide: false,
-            }).show();
-        }
-    }, [currentGuess]);
+    const handleToast = useCallback(
+        (index: number) => {
+            const toastLiveExample = document.getElementById("liveToast");
+            const toastMessages = [
+                "Genius",
+                "Magnificent",
+                "Impressive",
+                "Splendid",
+                "Phew",
+                "Great",
+                word.toUpperCase(),
+            ];
+            if (toastLiveExample) {
+                setToastMessage(toastMessages[index]);
+                new bootstrap.Toast(toastLiveExample, {
+                    autohide: false,
+                }).show();
+            }
+        },
+        [word]
+    );
 
     const handleEnter = useCallback(() => {
         if (currentGuess < 6) {
@@ -117,9 +130,10 @@ const GameSection = () => {
             const actual = word.toUpperCase();
 
             if (guess === actual) {
-                handleToast();
+                handleToast(currentGuess);
                 setCurrentCursor(0);
-                localStorage.setItem("otp", JSON.stringify(otp));
+                if (gameMode === "dailyGame")
+                    localStorage.setItem("otp", JSON.stringify(otp));
                 return setCurrentGuess(6);
             }
 
@@ -147,7 +161,8 @@ const GameSection = () => {
                         }
                     });
                 setCurrentCursor(0);
-                localStorage.setItem("otp", JSON.stringify(otp));
+                if (gameMode === "dailyGame")
+                    localStorage.setItem("otp", JSON.stringify(otp));
                 setCurrentGuess((prevGuess) => {
                     return prevGuess + 1;
                 });
@@ -155,11 +170,11 @@ const GameSection = () => {
 
             if (currentGuess === 5) {
                 setCurrentCursor(0);
-                handleToast();
                 setCurrentGuess(6);
+                handleToast(6);
             }
         }
-    }, [currentGuess, otp, handleToast]);
+    }, [currentGuess, otp, handleToast, word, gameMode]);
 
     const handleBackspace = useCallback(() => {
         if (isFinished()) return;
@@ -192,7 +207,7 @@ const GameSection = () => {
                 setCurrentCursor(currentCursor + 1);
             }
         },
-        [otp, currentGuess, currentCursor, isFinished]
+        [otp, currentGuess, currentCursor, isFinished, word]
     );
 
     useEffect(() => {
@@ -214,7 +229,7 @@ const GameSection = () => {
                 });
             }
         });
-    }, [currentGuess]);
+    }, [currentGuess, word]);
 
     useEffect(() => {
         if (currentCursor < word.length && !isFinished()) {
@@ -226,7 +241,7 @@ const GameSection = () => {
                 }
             });
         }
-    }, [otp, currentCursor, currentGuess, isFinished]);
+    }, [otp, currentCursor, currentGuess, isFinished, word]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -250,6 +265,7 @@ const GameSection = () => {
         handleLetterButton,
         isFinished,
         currentCursor,
+        word,
     ]);
 
     return (
