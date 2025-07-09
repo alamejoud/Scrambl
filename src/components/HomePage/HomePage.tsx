@@ -12,6 +12,10 @@ const HomePage = () => {
         navigate("/unlimited");
     };
 
+    const handlePreviousGames = () => {
+        navigate("/previousGames");
+    };
+
     return (
         <div className="page-div">
             <div className="main-div">
@@ -55,7 +59,10 @@ const HomePage = () => {
                 </div>
                 <hr className="w-100" />
                 <div className="d-flex flex flex-column align-items-center gap-2">
-                    <button className="btn btn-dark d-flex gap-2 py-2 secondary-button">
+                    <button
+                        className="btn btn-dark d-flex gap-2 py-2 secondary-button"
+                        onClick={handlePreviousGames}
+                    >
                         <i className="bi bi-calendar-date d-block"></i>Previous
                         Games
                     </button>

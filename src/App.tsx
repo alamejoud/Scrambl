@@ -2,6 +2,7 @@ import MainPage from "./components/MainPage/MainPage";
 import "./App.css";
 import HomePage from "./components/HomePage/HomePage";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import PreviousGames from "./components/PreviousGames/PreviousGames";
 
 const App = () => {
     return (
@@ -16,12 +17,13 @@ const App = () => {
                     path="/unlimited"
                     element={<MainPage gameMode="unlimited" />}
                 />
+                <Route path="/previousGames" element={<PreviousGames />} />
+                <Route
+                    path="/previousGames/:date"
+                    element={<MainPage gameMode="previousGames" />}
+                />
             </Routes>
         </Router>
-        // <div className="app-container">
-        //     {/* <MainPage /> */}
-        //     <HomePage />
-        // </div>
     );
 };
 

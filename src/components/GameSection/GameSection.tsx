@@ -4,6 +4,7 @@ import CryptoJS from "crypto-js";
 import "./GameSection.css";
 import InfoPanel from "../InfoPanel/InfoPanel";
 import * as bootstrap from "bootstrap";
+import { words as importedWords } from "../../vo/words";
 
 const dateKey = new Date().toISOString().slice(0, 10);
 
@@ -16,10 +17,7 @@ function decrypt(word: string) {
     return bytes.toString(CryptoJS.enc.Utf8);
 }
 
-const res = await fetch(
-    "https://random-word-api.herokuapp.com/word?number=1000&length=7"
-);
-const words = await res.json();
+const words = importedWords;
 const seed = [...dateKey].reduce(
     (acc, char, currentIndex) => acc + char.charCodeAt(0) * currentIndex,
     0
@@ -59,11 +57,34 @@ const otpSaved = (): string[][] => {
 
 interface GameSectionProps {
     gameMode: string;
+    date?: string;
 }
 
-const GameSection = ({ gameMode }: GameSectionProps) => {
+function stripTime(date: Date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+const GameSection = ({ gameMode, date }: GameSectionProps) => {
+    const getPreviousGame = () => {
+        if (date) {
+            const seed = [...new Date(date).toISOString().slice(0, 10)].reduce(
+                (acc, char, currentIndex) =>
+                    acc + char.charCodeAt(0) * currentIndex,
+                0
+            );
+            const index = seed % words.length;
+            const todaysWord = words[index];
+            return todaysWord;
+        } else {
+            return "";
+        }
+    };
     const [word] = useState(() =>
-        gameMode === "dailyGame" ? dailyWord : randomWord()
+        gameMode === "dailyGame"
+            ? dailyWord
+            : gameMode === "previousGames"
+            ? getPreviousGame()
+            : randomWord()
     );
     const [otp, setOtp] = useState(
         gameMode === "dailyGame"
@@ -267,6 +288,14 @@ const GameSection = ({ gameMode }: GameSectionProps) => {
         currentCursor,
         word,
     ]);
+
+    if (
+        date &&
+        (new Date(date) < new Date("2025-07-01") ||
+            new Date(date) >= stripTime(new Date()))
+    ) {
+        return <></>;
+    }
 
     return (
         <div className="game-section">

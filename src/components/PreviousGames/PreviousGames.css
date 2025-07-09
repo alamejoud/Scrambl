@@ -1,0 +1,29 @@
+.MuiDateCalendar-root {
+    height: 500px !important;
+    max-height: 500px !important;
+    width: 500px !important;
+}
+
+.MuiPickersDay-root, .MuiDayCalendar-weekDayLabel {
+    margin: auto !important;
+}
+
+.css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root {
+    color: rgba(255, 255, 255, 0.87) !important;
+}
+
+.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
+    color: rgba(255, 255, 255, 0.38) !important;
+}
+
+.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
+    border: 1px solid rgba(255, 255, 255, 0.6) !important; 
+}
+
+.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
+    color: rgba(255, 255, 255, 0.38) !important;
+}
