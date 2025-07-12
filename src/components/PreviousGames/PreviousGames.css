@@ -10,10 +10,22 @@
 
 .css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel {
     color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 1.5rem !important;
 }
 
 .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root {
     color: rgba(255, 255, 255, 0.87) !important;
+    font-size: 1.5rem !important;
+    border-radius: 5px !important;
+}
+
+.css-1etsrfk-MuiPickersFadeTransitionGroup-root {
+    font-size: 1.5rem !important;
+}
+
+.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root {
+    font-size: 1.5rem !important;
+    border-radius: 5px !important;
 }
 
 .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
@@ -26,4 +38,52 @@
 
 .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
     color: rgba(255, 255, 255, 0.38) !important;
+}
+
+.css-1pv2de5-MuiDayCalendar-weekContainer {
+    padding-block: 10px !important;
+}
+
+.css-1n1xn3x-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition {
+    min-height: 350px !important;
+}
+
+.css-1nxbkmn-MuiPickersCalendarHeader-root {
+    margin-block: 10px !important;
+}
+
+.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    border-radius: 5px !important;
+}
+
+.MuiDateCalendar-root {
+    height: 450px !important;
+}
+
+.title-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 10px;
+}
+
+.previous-games-div {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.play-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.play-div > button {
+    width: 100px;
+    height: 50px;
+    font-size: 1.5rem;
 }

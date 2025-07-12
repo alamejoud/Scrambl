@@ -5,6 +5,8 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import type { Dayjs } from "dayjs";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import Menu from "../Menu/Menu";
+import { useState } from "react";
 
 const PreviousGames = () => {
     const disableWeekends = (date: Dayjs) => {
@@ -16,19 +18,44 @@ const PreviousGames = () => {
     };
     const navigate = useNavigate();
 
+    const [dateChosen, setDateChosen] = useState("");
+
     const handleDateChange = (date: Dayjs | null) => {
         if (date) {
-            const formatted = date.format("YYYY-MM-DD");
-            navigate(`/previousGames/${formatted}`);
+            setDateChosen(date.format("YYYY-MM-DD"));
         }
     };
+
+    const handlePlay = () => {
+        if (dateChosen) {
+            navigate(`/previousGames/${dateChosen}`);
+        }
+    };
+
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateCalendar
-                shouldDisableDate={disableWeekends}
-                onChange={handleDateChange}
-            />
-        </LocalizationProvider>
+        <div className="previous-games-div">
+            <Menu previousGamesMenu={true} />
+            <div className="title-div">
+                <p className="title">Previous Games</p>
+            </div>
+            <div className="calendar-div">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DateCalendar
+                        shouldDisableDate={disableWeekends}
+                        onChange={handleDateChange}
+                    />
+                </LocalizationProvider>
+                <div className="play-div">
+                    <button
+                        className="btn btn-primary"
+                        onClick={handlePlay}
+                        disabled={!dateChosen || dateChosen == ""}
+                    >
+                        Play
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 };
 

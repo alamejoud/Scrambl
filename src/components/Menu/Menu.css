@@ -5,6 +5,7 @@
     align-items: center;
     background-color: #333;
     padding-inline: 20px;
+    width: 100%;
 }
 
 .menu-button {
@@ -29,4 +30,8 @@
 .right {
     display: flex;
     justify-content: flex-end;
+}
+
+.calendar-div {
+    width: fit-content;
 }

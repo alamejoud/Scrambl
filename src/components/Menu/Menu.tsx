@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 
-const Menu = () => {
+interface MenuProps {
+    previousGamesMenu?: boolean;
+}
+
+const Menu = ({ previousGamesMenu }: MenuProps) => {
     const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate("/");
+        navigate(-1);
     };
 
     return (
@@ -17,16 +21,20 @@ const Menu = () => {
             </div>
             <p className="title">Scrambl</p>
             <div className="right">
-                <button className="btn menu-button">
-                    <i className="bi bi-bar-chart"></i>
-                </button>
-                <button
-                    className="btn menu-button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#infoModal"
-                >
-                    <i className="bi bi-info-circle"></i>
-                </button>
+                {!previousGamesMenu && (
+                    <>
+                        <button className="btn menu-button">
+                            <i className="bi bi-bar-chart"></i>
+                        </button>
+                        <button
+                            className="btn menu-button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#infoModal"
+                        >
+                            <i className="bi bi-info-circle"></i>
+                        </button>
+                    </>
+                )}
                 <button className="btn menu-button">
                     <i className="bi bi-gear"></i>
                 </button>
