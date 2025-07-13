@@ -94,3 +94,26 @@
     color: white;
     margin: 0;
 }
+
+@media only screen and (max-width: 600px) {
+    .MuiDateCalendar-root {
+        width: 400px !important;
+    }
+
+    
+    .css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+        font-size: 1.25rem !important;
+    }
+
+    .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root {
+        font-size: 1.25rem !important;
+    }
+
+    .css-1etsrfk-MuiPickersFadeTransitionGroup-root {
+        font-size: 1.25rem !important;
+    }
+
+    .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root {
+        font-size: 1.25rem !important;
+    }
+}
