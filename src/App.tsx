@@ -6,7 +6,7 @@ import PreviousGames from "./components/PreviousGames/PreviousGames";
 
 const App = () => {
     return (
-        <Router>
+        <Router basename="/Scrambl">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route
