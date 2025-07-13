@@ -164,6 +164,13 @@ const GameSection = ({ gameMode, date }: GameSectionProps) => {
                 }
 
                 localStorage.setItem("stats", JSON.stringify(stats));
+                setTimeout(() => {
+                    const scoreModal = document.getElementById("scoreModal");
+                    if (scoreModal) {
+                        const modal = new bootstrap.Modal(scoreModal);
+                        modal.show();
+                    }
+                }, 3000);
             }
             const toastMessages = [
                 "Genius",
