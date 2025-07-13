@@ -8,51 +8,34 @@
     margin: auto !important;
 }
 
-.css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+.MuiDayCalendar-weekDayLabel {
     color: rgba(255, 255, 255, 0.6) !important;
     font-size: 1.5rem !important;
 }
 
-.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root {
+.MuiPickersDay-root {
     color: rgba(255, 255, 255, 0.87) !important;
     font-size: 1.5rem !important;
     border-radius: 5px !important;
 }
 
-.css-1etsrfk-MuiPickersFadeTransitionGroup-root {
-    font-size: 1.5rem !important;
-}
-
-.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root {
-    font-size: 1.5rem !important;
-    border-radius: 5px !important;
-}
-
-.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
+.MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
     color: rgba(255, 255, 255, 0.38) !important;
 }
 
-.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
-    border: 1px solid transparent !important; 
-}
-
-.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
-    color: rgba(255, 255, 255, 0.38) !important;
-}
-
-.css-1pv2de5-MuiDayCalendar-weekContainer {
+.MuiDayCalendar-weekContainer {
     padding-block: 10px !important;
 }
 
-.css-1n1xn3x-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition {
+.MuiPickersSlideTransition-root {
     min-height: 350px !important;
 }
 
-.css-1nxbkmn-MuiPickersCalendarHeader-root {
+.MuiPickersCalendarHeader-root {
     margin-block: 10px !important;
 }
 
-.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+.MuiPickersDay-root.Mui-selected {
     border-radius: 5px !important;
 }
 
@@ -101,19 +84,12 @@
     }
 
     
-    .css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    .MuiDayCalendar-weekDayLabel {
         font-size: 1.25rem !important;
     }
 
-    .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root {
+    .MuiPickersDay-root {
         font-size: 1.25rem !important;
     }
 
-    .css-1etsrfk-MuiPickersFadeTransitionGroup-root {
-        font-size: 1.25rem !important;
-    }
-
-    .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root {
-        font-size: 1.25rem !important;
-    }
 }
