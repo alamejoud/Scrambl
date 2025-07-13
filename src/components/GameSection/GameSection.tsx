@@ -5,6 +5,8 @@ import "./GameSection.css";
 import InfoPanel from "../InfoPanel/InfoPanel";
 import * as bootstrap from "bootstrap";
 import { words as importedWords } from "../../vo/words";
+import ScorePanel from "../ScorePanel/ScorePanel";
+import type { Stats } from "../../vo/Stats.ts";
 
 const dateKey = new Date().toISOString().slice(0, 10);
 
@@ -125,6 +127,44 @@ const GameSection = ({ gameMode, date }: GameSectionProps) => {
     const handleToast = useCallback(
         (index: number) => {
             const toastLiveExample = document.getElementById("liveToast");
+            if (gameMode == "dailyGame") {
+                let stats: Stats;
+                if (!localStorage.getItem("stats")) {
+                    stats = {
+                        timesPlayed: 0,
+                        timesWon: 0,
+                        currentStreak: 0,
+                        bestStreak: 0,
+                        totalStats: [
+                            { guess: 1, times: 0 },
+                            { guess: 2, times: 0 },
+                            { guess: 3, times: 0 },
+                            { guess: 4, times: 0 },
+                            { guess: 5, times: 0 },
+                            { guess: 6, times: 0 },
+                        ],
+                    };
+                } else {
+                    stats = JSON.parse(localStorage.getItem("stats") ?? "{}");
+                }
+
+                stats.timesPlayed += 1;
+                if (index < 6) {
+                    stats.timesWon += 1;
+                    stats.currentStreak += 1;
+                    if (stats.currentStreak > stats.bestStreak) {
+                        stats.bestStreak = stats.currentStreak;
+                    }
+
+                    if (stats.totalStats && stats.totalStats[index]) {
+                        stats.totalStats[index].times += 1;
+                    }
+                } else {
+                    stats.currentStreak = 0;
+                }
+
+                localStorage.setItem("stats", JSON.stringify(stats));
+            }
             const toastMessages = [
                 "Genius",
                 "Magnificent",
@@ -141,7 +181,7 @@ const GameSection = ({ gameMode, date }: GameSectionProps) => {
                 }).show();
             }
         },
-        [word]
+        [word, gameMode]
     );
 
     const handleEnter = useCallback(() => {
@@ -162,7 +202,6 @@ const GameSection = ({ gameMode, date }: GameSectionProps) => {
                 const invalidRow = document.querySelectorAll(".guess-row")[
                     currentGuess
                 ] as HTMLElement;
-                invalidRow.classList.add("guess-row-invalid");
                 invalidRow
                     .querySelectorAll(".otp-input")
                     .forEach((input, index) => {
@@ -365,7 +404,6 @@ const GameSection = ({ gameMode, date }: GameSectionProps) => {
                     </div>
                 </div>
             </div>
-            <InfoPanel />
             <div className="toast-container top-0 start-50 translate-middle-x">
                 <div
                     id="liveToast"
@@ -377,6 +415,8 @@ const GameSection = ({ gameMode, date }: GameSectionProps) => {
                     {toastMessage}
                 </div>
             </div>
+            <InfoPanel />
+            <ScorePanel />
         </div>
     );
 };

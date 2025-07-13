@@ -11,7 +11,7 @@ const MainPage = ({ gameMode }: MainPageProps) => {
     const { date } = useParams();
     return (
         <>
-            <Menu />
+            <Menu hideScoreButton={gameMode != "dailyGame"} />
             <GameSection gameMode={gameMode} date={date} />
         </>
     );

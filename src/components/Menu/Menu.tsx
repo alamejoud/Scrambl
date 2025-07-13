@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import "./Menu.css";
 
 interface MenuProps {
-    previousGamesMenu?: boolean;
+    hideScoreButton?: boolean;
 }
 
-const Menu = ({ previousGamesMenu }: MenuProps) => {
+const Menu = ({ hideScoreButton }: MenuProps) => {
     const navigate = useNavigate();
 
     const handleBack = () => {
@@ -21,20 +21,23 @@ const Menu = ({ previousGamesMenu }: MenuProps) => {
             </div>
             <p className="title">Scrambl</p>
             <div className="right">
-                {!previousGamesMenu && (
-                    <>
-                        <button className="btn menu-button">
-                            <i className="bi bi-bar-chart"></i>
-                        </button>
-                        <button
-                            className="btn menu-button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#infoModal"
-                        >
-                            <i className="bi bi-info-circle"></i>
-                        </button>
-                    </>
+                {!hideScoreButton && (
+                    <button
+                        className="btn menu-button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#scoreModal"
+                    >
+                        <i className="bi bi-bar-chart"></i>
+                    </button>
                 )}
+                <button
+                    className="btn menu-button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#infoModal"
+                >
+                    <i className="bi bi-info-circle"></i>
+                </button>
+
                 <button className="btn menu-button">
                     <i className="bi bi-gear"></i>
                 </button>

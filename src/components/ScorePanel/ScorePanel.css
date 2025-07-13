@@ -1,3 +1,28 @@
 .modal-backdrop {
     --bs-backdrop-opacity: 0.2;
 }
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats-modal-header > .btn-close {
+    margin-left: 0;
+}
+
+.main-stats-div {
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.guess-dist {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.css-7r4jdz-MuiChartsWrapper-root {
+    position: relative;
+    left: -20px;
+}

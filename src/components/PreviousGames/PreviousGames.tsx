@@ -34,11 +34,12 @@ const PreviousGames = () => {
 
     return (
         <div className="previous-games-div">
-            <Menu previousGamesMenu={true} />
+            <Menu hideScoreButton={true} />
             <div className="title-div">
-                <p className="title">Previous Games</p>
+                <p className="previous-games-title">Previous Games</p>
             </div>
             <div className="calendar-div">
+                <hr style={{ marginTop: 0 }} />
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DateCalendar
                         shouldDisableDate={disableWeekends}

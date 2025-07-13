@@ -33,7 +33,7 @@
 }
 
 .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
-    border: 1px solid rgba(255, 255, 255, 0.6) !important; 
+    border: 1px solid transparent !important; 
 }
 
 .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
@@ -86,4 +86,11 @@
     width: 100px;
     height: 50px;
     font-size: 1.5rem;
+}
+
+.previous-games-title {
+    padding: 10px;
+    font-size: 1.5rem;
+    color: white;
+    margin: 0;
 }
