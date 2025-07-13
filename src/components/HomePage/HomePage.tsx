@@ -23,7 +23,7 @@ const HomePage = () => {
                     className="icon-img"
                     width={"70px"}
                     height={"70px"}
-                    src="src\assets\icons\scrambl-logo.jpg"
+                    src="/Scrambl/scrambl-logo.jpg"
                 ></img>
                 <p className="main-title">Scrambl</p>
                 <div className="sub-title">
