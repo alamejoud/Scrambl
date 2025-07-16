@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; url=/Scrambl/" />
+    <meta charset="UTF-8" />
+    <script type="text/javascript">
+      // Get the current pathname, search, and hash
+      var pathname = window.location.pathname;
+      var search = window.location.search || "";
+      var hash = window.location.hash || "";
+
+      // Build redirect URL relative to the GitHub Pages subdirectory
+      var redirectTo = "/Scrambl" + pathname.replace(/^\/Scrambl/, "") + search + hash;
+
+      // Redirect to index.html with the full path
+      window.location.replace(redirectTo);
+    </script>
   </head>
   <body></body>
 </html>
